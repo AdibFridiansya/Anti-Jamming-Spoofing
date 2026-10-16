@@ -90,9 +90,8 @@ void INSMechanization::updateAttitude(const Eigen::Vector3f& omegab_ib, float dt
     Eigen::Matrix3f Omegab_ib = skewSymmetric(omegab_ib);
     Eigen::Matrix3f I3 = Eigen::Matrix3f::Identity();
 
-    // C_b^n(+) = C_b^n(-) * (I3 + Omega_ib_b * dt) - (Omega_ie_n + Omega_en_n) * C_b^n(-) * dt
     Eigen::Matrix3f Cn_b_plus;
-    Eigen::Matrix3f Cn_b_plus = Cn_b * (I3 + Omegab_ib * dt) - (Omegan_ie + Omegan_en) * Cn_b * dt;
+    Cn_b_plus = Cn_b * (I3 + Omegab_ib * dt) - (Omegan_ie + Omegan_en) * Cn_b * dt;
     
     Cn_b = Cn_b_plus;
     reorthogonalizeAttitude();

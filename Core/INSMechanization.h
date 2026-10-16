@@ -53,6 +53,24 @@ public:
     // Eq. (5.54) - Velocity Update (First-Order Approximation)
     void updateVelocity(const Eigen::Vector3f& fn_ib, float dt);
 
+    // Eq. (5.56) - Position Update (Unified 3D Trapezoidal Integration)
+    void updatePosition(const Eigen::Vector3f& vn_eb_minus, 
+                        const Eigen::Vector3f& vn_eb_plus, 
+                        float dt);
+
+    // --- Individual Position Update Functions (Sesuai dengan Slide Anda) ---
+    void updateLatitude(float v_N_minus, float v_N_plus, 
+                        double h_minus, double h_plus, 
+                        float dt);
+
+    void updateLongitude(float v_E_minus, float v_E_plus, 
+                         double h_minus, double h_plus, 
+                         double L_minus, double L_plus, 
+                         float dt);
+
+    void updateAltitude(float v_D_minus, float v_D_plus, float dt);
+    // -----------------------------------------------------------------------
+
     // Getters
     Eigen::Matrix3f getOrientation() const { return Cn_b; }
     Eigen::Vector3f getVelocity() const { return vn_eb; }
