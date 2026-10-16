@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\ins_sim.dir/objects.a
+C:\MinGW\bin\ar.exe qc CMakeFiles\ins_sim.dir/objects.a @CMakeFiles\ins_sim.dir\objects1.rsp
+C:\MinGW\bin\c++.exe -Wl,--whole-archive CMakeFiles\ins_sim.dir/objects.a -Wl,--no-whole-archive -o ins_sim.exe -Wl,--out-implib,libins_sim.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\ins_sim.dir\linkLibs.rsp
