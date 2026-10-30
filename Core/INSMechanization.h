@@ -18,13 +18,13 @@ private:
     // Skew-Symmetric Matrix / Cross-Product Operator [vec X]
     Eigen::Matrix3f skewSymmetric(const Eigen::Vector3f& vec) const;
 
-    // Eq. (5.41) - Earth rotation rate skew-symmetric matrix (Omega^n_ie)
+    // Eq. (5.41) - Earth rotation rate skew-symmetric matrix (Omega^n_ie)[cite: 18]
     Eigen::Matrix3f computeOmegan_ie(double L_b) const;
 
     // Eq. (2.105) & (2.106) - Meridian (R_N) and Transverse (R_E) radii of curvature
     void computeEarth(double L_b, double& R_N_Lb, double& R_E_Lb) const;
 
-    // Eq. (5.44) - Transport rate skew-symmetric matrix (Omega^n_en)
+    // Eq. (5.44) - Transport rate skew-symmetric matrix (Omega^n_en)[cite: 18]
     Eigen::Matrix3f computeOmegan_en(const Eigen::Vector3f& vn_eb, 
                                      double L_b, double h_b, 
                                      double R_N_Lb, double R_E_Lb) const;
@@ -45,15 +45,15 @@ public:
     // Eq. (5.46) - Attitude Update (First-Order Approximation)
     void updateAttitude(const Eigen::Vector3f& omega_ib_b, float dt);
 
-    // Eq. (5.47) - Specific-Force Frame Transformation
+    // Eq. (5.47) - Specific-Force Frame Transformation[cite: 19]
     Eigen::Vector3f transformSpecificForce(const Eigen::Vector3f& fb_ib, 
                                            const Eigen::Matrix3f& C_b_n_minus, 
                                            const Eigen::Matrix3f& C_b_n_plus) const;
 
-    // Eq. (5.54) - Velocity Update (First-Order Approximation)
+    // Eq. (5.54) - Velocity Update (First-Order Approximation)[cite: 20]
     void updateVelocity(const Eigen::Vector3f& fn_ib, float dt);
 
-    // Eq. (5.56) - Position Update (Unified 3D Trapezoidal Integration)
+    // Eq. (5.56) - Position Update (Unified 3D Trapezoidal Integration)[cite: 21]
     void updatePosition(const Eigen::Vector3f& vn_eb_minus, 
                         const Eigen::Vector3f& vn_eb_plus, 
                         float dt);

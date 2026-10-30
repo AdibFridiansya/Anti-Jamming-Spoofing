@@ -1,7 +1,7 @@
 #include "INSMechanization.h"
 #include <cmath>
 
-// Figure 5.7
+// Figure 5.7[cite: 17]
 INSMechanization::INSMechanization() {
     Cn_b = Eigen::Matrix3f::Identity();
     vn_eb = Eigen::Vector3f::Zero();
@@ -34,7 +34,7 @@ Eigen::Matrix3f INSMechanization::skewSymmetric(const Eigen::Vector3f& vec) cons
     return vector_skew;
 }
 
-// Eq. (5.41) - Omega^n_ie
+// Eq. (5.41) - Omega^n_ie[cite: 18]
 Eigen::Matrix3f INSMechanization::computeOmegan_ie(double L_b) const {
     const float sin_L = static_cast<float>(std::sin(L_b));
     const float cos_L = static_cast<float>(std::cos(L_b));
@@ -60,7 +60,7 @@ void INSMechanization::computeEarth(double L_b, double& RN_Lb, double& RE_Lb) co
     RE_Lb = R_0 / denom_sqrt;                                                       // Transverse radius (RE_Lb)
 }
 
-// Eq. (5.44) - Omegan_en
+// Eq. (5.44) - Omegan_en[cite: 18]
 Eigen::Matrix3f INSMechanization::computeOmegan_en(const Eigen::Vector3f& vn_eb, 
                                                    double L_b, double h_b, 
                                                    double RN_Lb, double RE_Lb) const {
@@ -80,6 +80,25 @@ Eigen::Matrix3f INSMechanization::computeOmegan_en(const Eigen::Vector3f& vn_eb,
     return Omegan_en;
 }
 
+// Eq. (2.134) - Earth gravity vector computation (g^n_b)
+Eigen::Vector3f INSMechanization::computeGravity(double L_b, double h_b) const {
+    // Somigliana Formula's
+    const double sin_L = std::sin(L_b);
+    const double sin_L_sqr = sin_L * sin_L;
+    
+    // ref. WGS-84
+    const double g_0 = 9.7803253359; 
+    const double gravity_num = g_0 * (1.0 + 0.00193185265241 * sin_L_sqr);
+    const double denom_sqrt = std::sqrt(1.0 - E_SQR * sin_L_sqr);
+    double gamma = gravity_num / denom_sqrt;
+    
+    // Eq. (5.122)
+    double g = gamma * (1.0 - (2.0 / R_0) * h_b);
+    
+    // Eq. (2.135)
+    return Eigen::Vector3f(0.0f, 0.0f, static_cast<float>(g));
+}
+
 // Eq. (5.46) - Attitude Update 
 void INSMechanization::updateAttitude(const Eigen::Vector3f& omegab_ib, float dt) {
     double RN_Lb, RE_Lb;
@@ -97,7 +116,7 @@ void INSMechanization::updateAttitude(const Eigen::Vector3f& omegab_ib, float dt
     reorthogonalizeAttitude();
 }
 
-// DCM Reorthogonalization
+// Reorthogonalization
 void INSMechanization::reorthogonalizeAttitude() {
     Eigen::Vector3f x = Cn_b.col(0);
     Eigen::Vector3f y = Cn_b.col(1);
@@ -110,4 +129,83 @@ void INSMechanization::reorthogonalizeAttitude() {
     Cn_b.col(0) = x_orth.normalized();
     Cn_b.col(1) = y_orth.normalized();
     Cn_b.col(2) = z_orth.normalized();
+}
+
+// Eq. (5.47) - Specific-Force Frame Transformation[cite: 19]
+Eigen::Vector3f INSMechanization::transformSpecificForce(const Eigen::Vector3f& fb_ib, 
+                                                         const Eigen::Matrix3f& Cn_b_minus, 
+                                                         const Eigen::Matrix3f& Cn_b_plus) const {
+    Eigen::Matrix3f Cn_b_avg = 0.5f * (Cn_b_minus + Cn_b_plus);
+    Eigen::Vector3f fn_ib = Cn_b_avg * fb_ib;
+    
+    return fn_ib;
+}
+
+// Eq. (5.54) - Velocity Update (First-Order Approximation)[cite: 20]
+void INSMechanization::updateVelocity(const Eigen::Vector3f& fn_ib, float dt) {
+    double RN_Lb, RE_Lb;
+    computeEarth(L_b, RN_Lb, RE_Lb);
+
+    Eigen::Vector3f gn_b = computeGravity(L_b, h_b); 
+    Eigen::Matrix3f Omegan_ie = computeOmegan_ie(L_b);
+    Eigen::Matrix3f Omegan_en = computeOmegan_en(vn_eb, L_b, h_b, RN_Lb, RE_Lb);
+    Eigen::Vector3f vn_eb_plus = vn_eb + (fn_ib + gn_b - (Omegan_en + 2.0f * Omegan_ie) * vn_eb) * dt;
+
+    vn_eb = vn_eb_plus;
+}
+
+// Eq. (5.56) - Position Update 
+void INSMechanization::updatePosition(const Eigen::Vector3f& vn_eb_minus, 
+                                      const Eigen::Vector3f& vn_eb_plus, 
+                                      float dt) {
+    double RN_minus, RE_minus;
+    computeEarth(L_b, RN_minus, RE_minus);
+
+    // Altitude 
+    double h_plus = h_b - 0.5 * dt * (vn_eb_minus(2) + vn_eb_plus(2));
+
+    // Latitude
+    double L_plus = L_b + 0.5 * dt * (vn_eb_minus(0) / (RN_minus + h_b) + 
+                                      vn_eb_plus(0) / (RN_minus + h_plus));
+
+    double RN_plus, RE_plus;
+    computeEarth(L_plus, RN_plus, RE_plus);
+
+    // Longitude
+    double lambda_plus = lambda_b + 0.5 * dt * (vn_eb_minus(1) / ((RE_minus + h_b) * std::cos(L_b)) + 
+                                                vn_eb_plus(1) / ((RE_plus + h_plus) * std::cos(L_plus)));
+    L_b      = L_plus;
+    lambda_b = lambda_plus;
+    h_b      = h_plus;
+}
+
+// Eq. (5.56) - Position Update (2nd Method)
+// Altitude 
+void INSMechanization::updateAltitude(float v_D_minus, float v_D_plus, float dt) {
+    h_b = h_b - 0.5 * dt * (v_D_minus + v_D_plus);
+}
+
+// Latitude 
+void INSMechanization::updateLatitude(float v_N_minus, float v_N_plus, 
+                                      double h_minus, double h_plus, 
+                                      float dt) {
+    double RN_minus, RE_minus;
+    computeEarth(L_b, RN_minus, RE_minus);
+    
+    L_b = L_b + 0.5 * dt * (v_N_minus / (RN_minus + h_minus) + 
+                            v_N_plus  / (RN_minus + h_plus));
+}
+
+// ELongitude
+void INSMechanization::updateLongitude(float v_E_minus, float v_E_plus, 
+                                       double h_minus, double h_plus, 
+                                       double L_minus, double L_plus, 
+                                       float dt) {
+
+    double RN_minus, RE_minus;
+    computeEarth(L_minus, RN_minus, RE_minus);
+    double RN_plus, RE_plus;
+    computeEarth(L_plus, RN_plus, RE_plus);
+    lambda_b = lambda_b + 0.5 * dt * (v_E_minus / ((RE_minus + h_minus) * std::cos(L_minus)) + 
+                                      v_E_plus  / ((RE_plus  + h_plus)  * std::cos(L_plus)));
 }
