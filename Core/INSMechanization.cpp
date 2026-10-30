@@ -1,7 +1,7 @@
 #include "INSMechanization.h"
 #include <cmath>
 
-// Figure 5.7[cite: 17]
+// Figure 5.7
 INSMechanization::INSMechanization() {
     Cn_b = Eigen::Matrix3f::Identity();
     vn_eb = Eigen::Vector3f::Zero();
@@ -34,7 +34,7 @@ Eigen::Matrix3f INSMechanization::skewSymmetric(const Eigen::Vector3f& vec) cons
     return vector_skew;
 }
 
-// Eq. (5.41) - Omega^n_ie[cite: 18]
+// Eq. (5.41) - Omega^n_ie
 Eigen::Matrix3f INSMechanization::computeOmegan_ie(double L_b) const {
     const float sin_L = static_cast<float>(std::sin(L_b));
     const float cos_L = static_cast<float>(std::cos(L_b));
@@ -131,7 +131,7 @@ void INSMechanization::reorthogonalizeAttitude() {
     Cn_b.col(2) = z_orth.normalized();
 }
 
-// Eq. (5.47) - Specific-Force Frame Transformation[cite: 19]
+// Eq. (5.47) - Specific-Force Frame Transformation
 Eigen::Vector3f INSMechanization::transformSpecificForce(const Eigen::Vector3f& fb_ib, 
                                                          const Eigen::Matrix3f& Cn_b_minus, 
                                                          const Eigen::Matrix3f& Cn_b_plus) const {
@@ -141,7 +141,7 @@ Eigen::Vector3f INSMechanization::transformSpecificForce(const Eigen::Vector3f& 
     return fn_ib;
 }
 
-// Eq. (5.54) - Velocity Update (First-Order Approximation)[cite: 20]
+// Eq. (5.54) - Velocity Update 
 void INSMechanization::updateVelocity(const Eigen::Vector3f& fn_ib, float dt) {
     double RN_Lb, RE_Lb;
     computeEarth(L_b, RN_Lb, RE_Lb);
@@ -208,4 +208,25 @@ void INSMechanization::updateLongitude(float v_E_minus, float v_E_plus,
     computeEarth(L_plus, RN_plus, RE_plus);
     lambda_b = lambda_b + 0.5 * dt * (v_E_minus / ((RE_minus + h_minus) * std::cos(L_minus)) + 
                                       v_E_plus  / ((RE_plus  + h_plus)  * std::cos(L_plus)));
+}
+
+// Eq. (14.63) - Closed-Loop State Correction
+void INSMechanization::applyErrorFeedback(const Eigen::Vector3f& delta_p, 
+                                          const Eigen::Vector3f& delta_v, 
+                                          const Eigen::Vector3f& delta_psi) {
+    double RN_Lb, RE_Lb;
+    computeEarth(L_b, RN_Lb, RE_Lb);
+
+    // 1. Position Error Feedback
+    L_b      -= static_cast<double>(delta_p(0)) / (RN_Lb + h_b);
+    lambda_b -= static_cast<double>(delta_p(1)) / ((RE_Lb + h_b) * std::cos(L_b));
+    h_b      += static_cast<double>(delta_p(2)); // delta_p(2) = -delta_h
+
+    // 2. Velocity Error Feedback
+    vn_eb -= delta_v;
+
+    // 3. Attitude Error Feedback: C_b_n(+) = (I3 - [psi x]) * C_b_n(-)
+    Eigen::Matrix3f psi_skew = skewSymmetric(delta_psi);
+    Cn_b = (Eigen::Matrix3f::Identity() - psi_skew) * Cn_b;
+    reorthogonalizeAttitude();
 }

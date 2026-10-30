@@ -128,77 +128,125 @@ ins_sim/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/build
 .PHONY : ins_sim/fast
 
-core/IMUPreProcessing.obj: core/IMUPreProcessing.cpp.obj
-.PHONY : core/IMUPreProcessing.obj
+Core/ExtendedKF.obj: Core/ExtendedKF.cpp.obj
+.PHONY : Core/ExtendedKF.obj
 
 # target to build an object file
-core/IMUPreProcessing.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj
-.PHONY : core/IMUPreProcessing.cpp.obj
+Core/ExtendedKF.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj
+.PHONY : Core/ExtendedKF.cpp.obj
 
-core/IMUPreProcessing.i: core/IMUPreProcessing.cpp.i
-.PHONY : core/IMUPreProcessing.i
+Core/ExtendedKF.i: Core/ExtendedKF.cpp.i
+.PHONY : Core/ExtendedKF.i
 
 # target to preprocess a source file
-core/IMUPreProcessing.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.i
-.PHONY : core/IMUPreProcessing.cpp.i
+Core/ExtendedKF.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.i
+.PHONY : Core/ExtendedKF.cpp.i
 
-core/IMUPreProcessing.s: core/IMUPreProcessing.cpp.s
-.PHONY : core/IMUPreProcessing.s
+Core/ExtendedKF.s: Core/ExtendedKF.cpp.s
+.PHONY : Core/ExtendedKF.s
 
 # target to generate assembly for a file
-core/IMUPreProcessing.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.s
-.PHONY : core/IMUPreProcessing.cpp.s
+Core/ExtendedKF.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.s
+.PHONY : Core/ExtendedKF.cpp.s
 
-sim/SensorSim.obj: sim/SensorSim.cpp.obj
-.PHONY : sim/SensorSim.obj
+Core/IMUPreProcessing.obj: Core/IMUPreProcessing.cpp.obj
+.PHONY : Core/IMUPreProcessing.obj
 
 # target to build an object file
-sim/SensorSim.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj
-.PHONY : sim/SensorSim.cpp.obj
+Core/IMUPreProcessing.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj
+.PHONY : Core/IMUPreProcessing.cpp.obj
 
-sim/SensorSim.i: sim/SensorSim.cpp.i
-.PHONY : sim/SensorSim.i
+Core/IMUPreProcessing.i: Core/IMUPreProcessing.cpp.i
+.PHONY : Core/IMUPreProcessing.i
 
 # target to preprocess a source file
-sim/SensorSim.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.i
-.PHONY : sim/SensorSim.cpp.i
+Core/IMUPreProcessing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.i
+.PHONY : Core/IMUPreProcessing.cpp.i
 
-sim/SensorSim.s: sim/SensorSim.cpp.s
-.PHONY : sim/SensorSim.s
+Core/IMUPreProcessing.s: Core/IMUPreProcessing.cpp.s
+.PHONY : Core/IMUPreProcessing.s
 
 # target to generate assembly for a file
-sim/SensorSim.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.s
-.PHONY : sim/SensorSim.cpp.s
+Core/IMUPreProcessing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.s
+.PHONY : Core/IMUPreProcessing.cpp.s
 
-sim/main.obj: sim/main.cpp.obj
-.PHONY : sim/main.obj
+Core/INSMechanization.obj: Core/INSMechanization.cpp.obj
+.PHONY : Core/INSMechanization.obj
 
 # target to build an object file
-sim/main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/sim/main.cpp.obj
-.PHONY : sim/main.cpp.obj
+Core/INSMechanization.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj
+.PHONY : Core/INSMechanization.cpp.obj
 
-sim/main.i: sim/main.cpp.i
-.PHONY : sim/main.i
+Core/INSMechanization.i: Core/INSMechanization.cpp.i
+.PHONY : Core/INSMechanization.i
 
 # target to preprocess a source file
-sim/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/sim/main.cpp.i
-.PHONY : sim/main.cpp.i
+Core/INSMechanization.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.i
+.PHONY : Core/INSMechanization.cpp.i
 
-sim/main.s: sim/main.cpp.s
-.PHONY : sim/main.s
+Core/INSMechanization.s: Core/INSMechanization.cpp.s
+.PHONY : Core/INSMechanization.s
 
 # target to generate assembly for a file
-sim/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/sim/main.cpp.s
-.PHONY : sim/main.cpp.s
+Core/INSMechanization.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.s
+.PHONY : Core/INSMechanization.cpp.s
+
+Sim/SensorReader.obj: Sim/SensorReader.cpp.obj
+.PHONY : Sim/SensorReader.obj
+
+# target to build an object file
+Sim/SensorReader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj
+.PHONY : Sim/SensorReader.cpp.obj
+
+Sim/SensorReader.i: Sim/SensorReader.cpp.i
+.PHONY : Sim/SensorReader.i
+
+# target to preprocess a source file
+Sim/SensorReader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.i
+.PHONY : Sim/SensorReader.cpp.i
+
+Sim/SensorReader.s: Sim/SensorReader.cpp.s
+.PHONY : Sim/SensorReader.s
+
+# target to generate assembly for a file
+Sim/SensorReader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.s
+.PHONY : Sim/SensorReader.cpp.s
+
+Sim/main.obj: Sim/main.cpp.obj
+.PHONY : Sim/main.obj
+
+# target to build an object file
+Sim/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Sim/main.cpp.obj
+.PHONY : Sim/main.cpp.obj
+
+Sim/main.i: Sim/main.cpp.i
+.PHONY : Sim/main.i
+
+# target to preprocess a source file
+Sim/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Sim/main.cpp.i
+.PHONY : Sim/main.cpp.i
+
+Sim/main.s: Sim/main.cpp.s
+.PHONY : Sim/main.s
+
+# target to generate assembly for a file
+Sim/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ins_sim.dir\build.make CMakeFiles/ins_sim.dir/Sim/main.cpp.s
+.PHONY : Sim/main.cpp.s
 
 # Help Target
 help:
@@ -209,15 +257,21 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... ins_sim
-	@echo ... core/IMUPreProcessing.obj
-	@echo ... core/IMUPreProcessing.i
-	@echo ... core/IMUPreProcessing.s
-	@echo ... sim/SensorSim.obj
-	@echo ... sim/SensorSim.i
-	@echo ... sim/SensorSim.s
-	@echo ... sim/main.obj
-	@echo ... sim/main.i
-	@echo ... sim/main.s
+	@echo ... Core/ExtendedKF.obj
+	@echo ... Core/ExtendedKF.i
+	@echo ... Core/ExtendedKF.s
+	@echo ... Core/IMUPreProcessing.obj
+	@echo ... Core/IMUPreProcessing.i
+	@echo ... Core/IMUPreProcessing.s
+	@echo ... Core/INSMechanization.obj
+	@echo ... Core/INSMechanization.i
+	@echo ... Core/INSMechanization.s
+	@echo ... Sim/SensorReader.obj
+	@echo ... Sim/SensorReader.i
+	@echo ... Sim/SensorReader.s
+	@echo ... Sim/main.obj
+	@echo ... Sim/main.i
+	@echo ... Sim/main.s
 .PHONY : help
 
 

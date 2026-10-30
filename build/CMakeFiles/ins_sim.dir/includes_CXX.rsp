@@ -1,1 +1,1 @@
--I"E:/Tugas Akhir/New Firmware/core" -I"E:/Tugas Akhir/New Firmware/sim" -I"E:/Tugas Akhir/New Firmware/Core" -I"E:/Tugas Akhir/New Firmware/Sim" -I"E:/Tugas Akhir/New Firmware/Hw" -isystem "E:/C Environment/eigen-5.0.1"
+-I"E:/Tugas Akhir/New Firmware" -I"E:/Tugas Akhir/New Firmware/Core" -I"E:/Tugas Akhir/New Firmware/Sim" -I"E:/Tugas Akhir/New Firmware/Hw"

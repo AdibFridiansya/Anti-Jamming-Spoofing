@@ -71,68 +71,102 @@ include CMakeFiles/ins_sim.dir/flags.make
 CMakeFiles/ins_sim.dir/codegen:
 .PHONY : CMakeFiles/ins_sim.dir/codegen
 
-CMakeFiles/ins_sim.dir/sim/main.cpp.obj: CMakeFiles/ins_sim.dir/flags.make
-CMakeFiles/ins_sim.dir/sim/main.cpp.obj: CMakeFiles/ins_sim.dir/includes_CXX.rsp
-CMakeFiles/ins_sim.dir/sim/main.cpp.obj: E:/Tugas\ Akhir/New\ Firmware/sim/main.cpp
-CMakeFiles/ins_sim.dir/sim/main.cpp.obj: CMakeFiles/ins_sim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ins_sim.dir/sim/main.cpp.obj"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ins_sim.dir/sim/main.cpp.obj -MF CMakeFiles\ins_sim.dir\sim\main.cpp.obj.d -o CMakeFiles\ins_sim.dir\sim\main.cpp.obj -c "E:\Tugas Akhir\New Firmware\sim\main.cpp"
+CMakeFiles/ins_sim.dir/Sim/main.cpp.obj: CMakeFiles/ins_sim.dir/flags.make
+CMakeFiles/ins_sim.dir/Sim/main.cpp.obj: CMakeFiles/ins_sim.dir/includes_CXX.rsp
+CMakeFiles/ins_sim.dir/Sim/main.cpp.obj: E:/Tugas\ Akhir/New\ Firmware/Sim/main.cpp
+CMakeFiles/ins_sim.dir/Sim/main.cpp.obj: CMakeFiles/ins_sim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ins_sim.dir/Sim/main.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ins_sim.dir/Sim/main.cpp.obj -MF CMakeFiles\ins_sim.dir\Sim\main.cpp.obj.d -o CMakeFiles\ins_sim.dir\Sim\main.cpp.obj -c "E:\Tugas Akhir\New Firmware\Sim\main.cpp"
 
-CMakeFiles/ins_sim.dir/sim/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ins_sim.dir/sim/main.cpp.i"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Tugas Akhir\New Firmware\sim\main.cpp" > CMakeFiles\ins_sim.dir\sim\main.cpp.i
+CMakeFiles/ins_sim.dir/Sim/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ins_sim.dir/Sim/main.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Tugas Akhir\New Firmware\Sim\main.cpp" > CMakeFiles\ins_sim.dir\Sim\main.cpp.i
 
-CMakeFiles/ins_sim.dir/sim/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ins_sim.dir/sim/main.cpp.s"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Tugas Akhir\New Firmware\sim\main.cpp" -o CMakeFiles\ins_sim.dir\sim\main.cpp.s
+CMakeFiles/ins_sim.dir/Sim/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ins_sim.dir/Sim/main.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Tugas Akhir\New Firmware\Sim\main.cpp" -o CMakeFiles\ins_sim.dir\Sim\main.cpp.s
 
-CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj: CMakeFiles/ins_sim.dir/flags.make
-CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj: CMakeFiles/ins_sim.dir/includes_CXX.rsp
-CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj: E:/Tugas\ Akhir/New\ Firmware/sim/SensorSim.cpp
-CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj: CMakeFiles/ins_sim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj -MF CMakeFiles\ins_sim.dir\sim\SensorSim.cpp.obj.d -o CMakeFiles\ins_sim.dir\sim\SensorSim.cpp.obj -c "E:\Tugas Akhir\New Firmware\sim\SensorSim.cpp"
+CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj: CMakeFiles/ins_sim.dir/flags.make
+CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj: CMakeFiles/ins_sim.dir/includes_CXX.rsp
+CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj: E:/Tugas\ Akhir/New\ Firmware/Sim/SensorReader.cpp
+CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj: CMakeFiles/ins_sim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj -MF CMakeFiles\ins_sim.dir\Sim\SensorReader.cpp.obj.d -o CMakeFiles\ins_sim.dir\Sim\SensorReader.cpp.obj -c "E:\Tugas Akhir\New Firmware\Sim\SensorReader.cpp"
 
-CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.i"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Tugas Akhir\New Firmware\sim\SensorSim.cpp" > CMakeFiles\ins_sim.dir\sim\SensorSim.cpp.i
+CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Tugas Akhir\New Firmware\Sim\SensorReader.cpp" > CMakeFiles\ins_sim.dir\Sim\SensorReader.cpp.i
 
-CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.s"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Tugas Akhir\New Firmware\sim\SensorSim.cpp" -o CMakeFiles\ins_sim.dir\sim\SensorSim.cpp.s
+CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Tugas Akhir\New Firmware\Sim\SensorReader.cpp" -o CMakeFiles\ins_sim.dir\Sim\SensorReader.cpp.s
 
-CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj: CMakeFiles/ins_sim.dir/flags.make
-CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj: CMakeFiles/ins_sim.dir/includes_CXX.rsp
-CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj: E:/Tugas\ Akhir/New\ Firmware/core/IMUPreProcessing.cpp
-CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj: CMakeFiles/ins_sim.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj -MF CMakeFiles\ins_sim.dir\core\IMUPreProcessing.cpp.obj.d -o CMakeFiles\ins_sim.dir\core\IMUPreProcessing.cpp.obj -c "E:\Tugas Akhir\New Firmware\core\IMUPreProcessing.cpp"
+CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj: CMakeFiles/ins_sim.dir/flags.make
+CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj: CMakeFiles/ins_sim.dir/includes_CXX.rsp
+CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj: E:/Tugas\ Akhir/New\ Firmware/Core/INSMechanization.cpp
+CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj: CMakeFiles/ins_sim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj -MF CMakeFiles\ins_sim.dir\Core\INSMechanization.cpp.obj.d -o CMakeFiles\ins_sim.dir\Core\INSMechanization.cpp.obj -c "E:\Tugas Akhir\New Firmware\Core\INSMechanization.cpp"
 
-CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.i"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Tugas Akhir\New Firmware\core\IMUPreProcessing.cpp" > CMakeFiles\ins_sim.dir\core\IMUPreProcessing.cpp.i
+CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Tugas Akhir\New Firmware\Core\INSMechanization.cpp" > CMakeFiles\ins_sim.dir\Core\INSMechanization.cpp.i
 
-CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.s"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Tugas Akhir\New Firmware\core\IMUPreProcessing.cpp" -o CMakeFiles\ins_sim.dir\core\IMUPreProcessing.cpp.s
+CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Tugas Akhir\New Firmware\Core\INSMechanization.cpp" -o CMakeFiles\ins_sim.dir\Core\INSMechanization.cpp.s
+
+CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj: CMakeFiles/ins_sim.dir/flags.make
+CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj: CMakeFiles/ins_sim.dir/includes_CXX.rsp
+CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj: E:/Tugas\ Akhir/New\ Firmware/Core/ExtendedKF.cpp
+CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj: CMakeFiles/ins_sim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj -MF CMakeFiles\ins_sim.dir\Core\ExtendedKF.cpp.obj.d -o CMakeFiles\ins_sim.dir\Core\ExtendedKF.cpp.obj -c "E:\Tugas Akhir\New Firmware\Core\ExtendedKF.cpp"
+
+CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Tugas Akhir\New Firmware\Core\ExtendedKF.cpp" > CMakeFiles\ins_sim.dir\Core\ExtendedKF.cpp.i
+
+CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Tugas Akhir\New Firmware\Core\ExtendedKF.cpp" -o CMakeFiles\ins_sim.dir\Core\ExtendedKF.cpp.s
+
+CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj: CMakeFiles/ins_sim.dir/flags.make
+CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj: CMakeFiles/ins_sim.dir/includes_CXX.rsp
+CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj: E:/Tugas\ Akhir/New\ Firmware/Core/IMUPreProcessing.cpp
+CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj: CMakeFiles/ins_sim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj -MF CMakeFiles\ins_sim.dir\Core\IMUPreProcessing.cpp.obj.d -o CMakeFiles\ins_sim.dir\Core\IMUPreProcessing.cpp.obj -c "E:\Tugas Akhir\New Firmware\Core\IMUPreProcessing.cpp"
+
+CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Tugas Akhir\New Firmware\Core\IMUPreProcessing.cpp" > CMakeFiles\ins_sim.dir\Core\IMUPreProcessing.cpp.i
+
+CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Tugas Akhir\New Firmware\Core\IMUPreProcessing.cpp" -o CMakeFiles\ins_sim.dir\Core\IMUPreProcessing.cpp.s
 
 # Object files for target ins_sim
 ins_sim_OBJECTS = \
-"CMakeFiles/ins_sim.dir/sim/main.cpp.obj" \
-"CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj" \
-"CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj"
+"CMakeFiles/ins_sim.dir/Sim/main.cpp.obj" \
+"CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj" \
+"CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj" \
+"CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj" \
+"CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj"
 
 # External object files for target ins_sim
 ins_sim_EXTERNAL_OBJECTS =
 
-ins_sim.exe: CMakeFiles/ins_sim.dir/sim/main.cpp.obj
-ins_sim.exe: CMakeFiles/ins_sim.dir/sim/SensorSim.cpp.obj
-ins_sim.exe: CMakeFiles/ins_sim.dir/core/IMUPreProcessing.cpp.obj
+ins_sim.exe: CMakeFiles/ins_sim.dir/Sim/main.cpp.obj
+ins_sim.exe: CMakeFiles/ins_sim.dir/Sim/SensorReader.cpp.obj
+ins_sim.exe: CMakeFiles/ins_sim.dir/Core/INSMechanization.cpp.obj
+ins_sim.exe: CMakeFiles/ins_sim.dir/Core/ExtendedKF.cpp.obj
+ins_sim.exe: CMakeFiles/ins_sim.dir/Core/IMUPreProcessing.cpp.obj
 ins_sim.exe: CMakeFiles/ins_sim.dir/build.make
 ins_sim.exe: CMakeFiles/ins_sim.dir/linkLibs.rsp
 ins_sim.exe: CMakeFiles/ins_sim.dir/objects1.rsp
 ins_sim.exe: CMakeFiles/ins_sim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable ins_sim.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="E:\Tugas Akhir\New Firmware\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ins_sim.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\ins_sim.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
