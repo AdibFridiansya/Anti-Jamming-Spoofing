@@ -23,6 +23,7 @@ void INSMechanization::initialize(double init_L_b, double init_lambda_b, double 
     Eigen::AngleAxisf yawAngle(yaw_rad, Eigen::Vector3f::UnitZ());
 
     Cn_b = yawAngle * pitchAngle * rollAngle;                   // (C^n_b) Orientation Matrix
+    reorthogonalizeAttitude();
 }
 
 // Skew-Symmetric Matrix 
@@ -60,7 +61,7 @@ void INSMechanization::computeEarth(double L_b, double& RN_Lb, double& RE_Lb) co
     RE_Lb = R_0 / denom_sqrt;                                                       // Transverse radius (RE_Lb)
 }
 
-// Eq. (5.44) - Omegan_en[cite: 18]
+// Eq. (5.44) - Omegan_en
 Eigen::Matrix3f INSMechanization::computeOmegan_en(const Eigen::Vector3f& vn_eb, 
                                                    double L_b, double h_b, 
                                                    double RN_Lb, double RE_Lb) const {
@@ -90,10 +91,10 @@ Eigen::Vector3f INSMechanization::computeGravity(double L_b, double h_b) const {
     const double g_0 = 9.7803253359; 
     const double gravity_num = g_0 * (1.0 + 0.00193185265241 * sin_L_sqr);
     const double denom_sqrt = std::sqrt(1.0 - E_SQR * sin_L_sqr);
-    double gamma = gravity_num / denom_sqrt;
+    const double gamma = gravity_num / denom_sqrt;
     
     // Eq. (5.122)
-    double g = gamma * (1.0 - (2.0 / R_0) * h_b);
+    const double g = gamma * (1.0 - (2.0 / R_0) * h_b);
     
     // Eq. (2.135)
     return Eigen::Vector3f(0.0f, 0.0f, static_cast<float>(g));
@@ -161,19 +162,28 @@ void INSMechanization::updatePosition(const Eigen::Vector3f& vn_eb_minus,
     double RN_minus, RE_minus;
     computeEarth(L_b, RN_minus, RE_minus);
 
+    const double dt_d = static_cast<double>(dt);
+    const double v_N_minus = static_cast<double>(vn_eb_minus(0));
+    const double v_E_minus = static_cast<double>(vn_eb_minus(1));
+    const double v_D_minus = static_cast<double>(vn_eb_minus(2));
+
+    const double v_N_plus = static_cast<double>(vn_eb_plus(0));
+    const double v_E_plus = static_cast<double>(vn_eb_plus(1));
+    const double v_D_plus = static_cast<double>(vn_eb_plus(2));
+
     // Altitude 
-    double h_plus = h_b - 0.5 * dt * (vn_eb_minus(2) + vn_eb_plus(2));
+    double h_plus = h_b - 0.5 * dt_d * (v_D_minus + v_D_plus);
 
     // Latitude
-    double L_plus = L_b + 0.5 * dt * (vn_eb_minus(0) / (RN_minus + h_b) + 
-                                      vn_eb_plus(0) / (RN_minus + h_plus));
+    double L_plus = L_b + 0.5 * dt_d * (v_N_minus / (RN_minus + h_b) + 
+                                        v_N_plus  / (RN_minus + h_plus));
 
     double RN_plus, RE_plus;
     computeEarth(L_plus, RN_plus, RE_plus);
 
     // Longitude
-    double lambda_plus = lambda_b + 0.5 * dt * (vn_eb_minus(1) / ((RE_minus + h_b) * std::cos(L_b)) + 
-                                                vn_eb_plus(1) / ((RE_plus + h_plus) * std::cos(L_plus)));
+    double lambda_plus = lambda_b + 0.5 * dt_d * (v_E_minus / ((RE_minus + h_b)    * std::cos(L_b)) + 
+                                                  v_E_plus  / ((RE_plus  + h_plus) * std::cos(L_plus)));
     L_b      = L_plus;
     lambda_b = lambda_plus;
     h_b      = h_plus;
@@ -182,7 +192,7 @@ void INSMechanization::updatePosition(const Eigen::Vector3f& vn_eb_minus,
 // Eq. (5.56) - Position Update (2nd Method)
 // Altitude 
 void INSMechanization::updateAltitude(float v_D_minus, float v_D_plus, float dt) {
-    h_b = h_b - 0.5 * dt * (v_D_minus + v_D_plus);
+    h_b = h_b - 0.5 * static_cast<double>(dt) * static_cast<double>(v_D_minus + v_D_plus);
 }
 
 // Latitude 
@@ -192,22 +202,23 @@ void INSMechanization::updateLatitude(float v_N_minus, float v_N_plus,
     double RN_minus, RE_minus;
     computeEarth(L_b, RN_minus, RE_minus);
     
-    L_b = L_b + 0.5 * dt * (v_N_minus / (RN_minus + h_minus) + 
-                            v_N_plus  / (RN_minus + h_plus));
+    h_minus = h_b; 
+    L_b = L_b + 0.5 * static_cast<double>(dt) * (static_cast<double>(v_N_minus) / (RN_minus + h_minus) + 
+                                                 static_cast<double>(v_N_plus)  / (RN_minus + h_plus));
 }
 
-// ELongitude
+// Longitude
 void INSMechanization::updateLongitude(float v_E_minus, float v_E_plus, 
                                        double h_minus, double h_plus, 
                                        double L_minus, double L_plus, 
                                        float dt) {
-
     double RN_minus, RE_minus;
     computeEarth(L_minus, RN_minus, RE_minus);
     double RN_plus, RE_plus;
     computeEarth(L_plus, RN_plus, RE_plus);
-    lambda_b = lambda_b + 0.5 * dt * (v_E_minus / ((RE_minus + h_minus) * std::cos(L_minus)) + 
-                                      v_E_plus  / ((RE_plus  + h_plus)  * std::cos(L_plus)));
+
+    lambda_b = lambda_b + 0.5 * static_cast<double>(dt) * (static_cast<double>(v_E_minus) / ((RE_minus + h_minus) * std::cos(L_minus)) + 
+                                                           static_cast<double>(v_E_plus)  / ((RE_plus  + h_plus)  * std::cos(L_plus)));
 }
 
 // Eq. (14.63) - Closed-Loop State Correction
@@ -217,15 +228,16 @@ void INSMechanization::applyErrorFeedback(const Eigen::Vector3f& delta_p,
     double RN_Lb, RE_Lb;
     computeEarth(L_b, RN_Lb, RE_Lb);
 
-    // 1. Position Error Feedback
+    // 1. Position Error Feedback (Groves Eq. 14.60 & 14.61)
+    // delta_p = [delta_N, delta_E, delta_D]^T
     L_b      -= static_cast<double>(delta_p(0)) / (RN_Lb + h_b);
     lambda_b -= static_cast<double>(delta_p(1)) / ((RE_Lb + h_b) * std::cos(L_b));
-    h_b      += static_cast<double>(delta_p(2)); // delta_p(2) = -delta_h
+    h_b      += static_cast<double>(delta_p(2)); 
 
-    // 2. Velocity Error Feedback
+    // 2. Velocity Error Feedback (Groves Eq. 14.62)
     vn_eb -= delta_v;
 
-    // 3. Attitude Error Feedback: C_b_n(+) = (I3 - [psi x]) * C_b_n(-)
+    // 3. Attitude Error Feedback: C_b_n(+) = (I3 - [psi x]) * C_b_n(-) (Groves Eq. 14.63)
     Eigen::Matrix3f psi_skew = skewSymmetric(delta_psi);
     Cn_b = (Eigen::Matrix3f::Identity() - psi_skew) * Cn_b;
     reorthogonalizeAttitude();
