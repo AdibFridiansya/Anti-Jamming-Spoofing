@@ -122,6 +122,34 @@ void ExtendedKF::predict(const Eigen::Matrix3f& cn_b, const Eigen::Vector3f& fn_
     P = Phi * (P + half_Q) * Phi.transpose() + half_Q;
 
     enforceCovarianceSymmetryAndFloor();
+    // Eq. (14.50) & (3.34) - Transition Matrix Phi approx (I + F * dt)
+    Phi.block<3, 3>(0, 3) = Eigen::Matrix3f::Identity() * dt;
+    
+    Phi.block<3, 3>(3, 6) = -skewSymmetric(fn_ib) * dt;
+    
+    Phi.block<3, 3>(3, 9) = cn_b * dt;
+    
+    Phi.block<3, 3>(6, 12) = -cn_b * dt;
+
+    float Sa  = 0.05f * 0.05f;       // Tuning: Noise PSD akselerometer
+    float Sg  = 0.005f * 0.005f;     // Tuning: Noise PSD giroskop
+    float Sba = 0.0001f * 0.0001f;   // Tuning: Instabilitas / random walk bias akselerometer
+    float Sbg = 0.00001f * 0.00001f; // Tuning: Instabilitas / random walk bias giroskop
+
+    Q.setZero();
+    // Q = G * S * G^T * dt
+    Q.block<3, 3>(3, 3)   = Eigen::Matrix3f::Identity() * (Sa * dt);
+    Q.block<3, 3>(6, 6)   = Eigen::Matrix3f::Identity() * (Sg * dt);
+    Q.block<3, 3>(9, 9)   = Eigen::Matrix3f::Identity() * (Sba * dt);
+    Q.block<3, 3>(12, 12) = Eigen::Matrix3f::Identity() * (Sbg * dt);
+
+    // Eq. (3.14)
+    x_err = Phi * x_err;
+
+    // Eq. (3.15)
+    P = Phi * P * Phi.transpose() + Q;
+
+    P = 0.5f * (P + P.transpose());
 }
 
 // Section 3.2.4 - Measurement Update Phase (Groves)
@@ -136,6 +164,8 @@ void ExtendedKF::correct(const Eigen::Matrix<float, 6, 1>& dz) {
     // Eq. (3.21) - Kalman Gain Matrix (Groves)
     Eigen::Matrix<float, 6, 15> HP = H * P;
     Eigen::Matrix<float, 15, 6> K = S_cov.ldlt().solve(HP).transpose();
+    Eigen::Matrix<float, 6, 15> HP = H * P;
+    Eigen::Matrix<float, 15, 6> K = S.ldlt().solve(HP).transpose();
 
     // Eq. (3.24) - State Vector Update (Groves)
     x_err = x_err + K * dz_minus;
@@ -172,6 +202,9 @@ void ExtendedKF::correctSequential(const Eigen::Matrix<float, 6, 1>& dz) {
     }
 
     enforceCovarianceSymmetryAndFloor();
+    // Eq. (3.25) - Error covariance update menggunakan formula yang distabilkan
+    P = (I15 - K * H) * P;
+    P = 0.5f * (P + P.transpose());
 }
 
 Eigen::Matrix<float, 15, 1> ExtendedKF::getErrorState() const {

@@ -1,6 +1,8 @@
 #ifndef EXTENDED_KF_H
 #define EXTENDED_KF_H
 
+// [VERIFIED] Menonaktifkan vektorisasi internal Eigen untuk mencegah 
+// Segmentaton Fault (Crash) saat kompilasi menggunakan MinGW di Windows
 #ifndef EIGEN_DONT_VECTORIZE
 #define EIGEN_DONT_VECTORIZE
 #endif
@@ -15,8 +17,11 @@
 
 class ExtendedKF {
 public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW // Menjaga batas stack alignment memori
+
     ExtendedKF();
 
+    // [UPDATED] Argumen init_Q dihapus. Q akan dihitung secara dinamis di dalam fungsi predict().
     void initialize(const Eigen::Matrix<float, 15, 15>& P0, 
                     const Eigen::Matrix<float, 6, 6>& init_R);
 
@@ -38,6 +43,18 @@ public:
     void setBiasCorrelationTimes(float tau_ba_s, float tau_bg_s);
 
     // Section 3.2.6 - Closed-Loop State Reset (Groves)
+    // [UPDATED] Fungsi setQ() dihapus.
+
+    Eigen::Matrix3f skewSymmetric(const Eigen::Vector3f& vec) const;
+    
+    // Fungsi Prediksi state EKF
+    void predict(const Eigen::Matrix3f& cn_b, const Eigen::Vector3f& fn_ib, float dt);
+    
+    // Fungsi Koreksi state EKF
+    void correct(const Eigen::Matrix<float, 6, 1>& dz);
+    
+    Eigen::Matrix<float, 15, 1> getErrorState() const;
+    
     void resetState();
     void resetNavigationStatesOnly();
 
