@@ -6,8 +6,8 @@
 #include "IMUPreProcessing.h"
 
 IMUPreProcessing::IMUPreProcessing() {
-    bias_AccStatic = Eigen::Vector3f(0.012f, -0.005f, 0.001f);
-    bias_GyrStatic = Eigen::Vector3f(0.002f, 0.001f, -0.003f);
+    bias_AccStatic = Eigen::Vector3f::Zero();
+    bias_GyrStatic = Eigen::Vector3f::Zero();
     /* Calibration (Vector Changed) Template Exmp.
     bias_AccStatic = Eigen::Vector3f(0.012f, -0.005f, 0.001f);
     bias_GyrStatic = Eigen::Vector3f(0.002f, 0.001f, -0.003f);
@@ -27,6 +27,7 @@ IMUPreProcessing::IMUPreProcessing() {
                             0.0000f, 0.0001f, 0.0000f,
                             0.0000f, 0.0000f, 0.0001f;
     */
+    currentData = {};
 }
 
 void IMUPreProcessing::inputRawData(const IMUDataPacket& rawData) {
@@ -37,15 +38,15 @@ void IMUPreProcessing::setBiasesStatic(const Eigen::Vector3f& b_as, const Eigen:
     bias_AccStatic = b_as;
     bias_GyrStatic = b_gs;
 }
-
+// Eq. (4.19)-(4.21)
 void IMUPreProcessing::setScaleCrossMatrices(const Eigen::Matrix3f& M_a, const Eigen::Matrix3f& M_g, const Eigen::Matrix3f& G_g) {
-    matrix_AccScaleCross = M_a;                                                       // or ^(M_a)
-    matrix_GyrScaleCross = M_g;                                                       // or ^(M_g)
-    matrix_GyrGDependent = G_g;                                                       // or ^(G_g)
+    matrix_AccScaleCross = M_a;                                                       // (I_3 + ^M_a)^(-1)
+    matrix_GyrScaleCross = M_g;                                                       // (I_3 + ^M_g)^(-1)
+    matrix_GyrGDependent = G_g;                                                       // ^G_g
 }
 
 ProcessedIMUData IMUPreProcessing::getProcessedData() {
-    ProcessedIMUData outData;
+    ProcessedIMUData outData{};
     outData.isValid = false;
 
     if (!currentData.isDataValid) {
@@ -54,6 +55,11 @@ ProcessedIMUData IMUPreProcessing::getProcessedData() {
 
     Eigen::Vector3f f_raw(currentData.accX, currentData.accY, currentData.accZ);      // ~(f^b_ib)  
     Eigen::Vector3f w_raw(currentData.gyrX, currentData.gyrY, currentData.gyrZ);      // ~(w^b_ib)
+
+    // Anti NaN & Inf
+    if (!f_raw.allFinite() || !w_raw.allFinite()) {
+        return outData;
+    }
 
     // Eq.(4.13), b_ad (bias_AccDynamic) & b_gd(bias_GyrDynamic) will be Continued in EKF Equations
     Eigen::Vector3f f_unbiased = f_raw - bias_AccStatic;                                                                                                                                                                                                                                        
