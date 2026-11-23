@@ -193,7 +193,6 @@ void INSMechanization::updatePosition(const Eigen::Vector3f& vn_eb_minus,
 // Altitude 
 void INSMechanization::updateAltitude(float v_D_minus, float v_D_plus, float dt) {
     h_b = h_b - 0.5 * static_cast<double>(dt) * (static_cast<double>(v_D_minus) + static_cast<double>(v_D_plus));
-    h_b = h_b - 0.5 * static_cast<double>(dt) * static_cast<double>(v_D_minus + v_D_plus);
 }
 
 // Latitude 
@@ -203,8 +202,6 @@ void INSMechanization::updateLatitude(float v_N_minus, float v_N_plus,
     double RN_minus, RE_minus;
     computeEarth(L_b, RN_minus, RE_minus);
      
-    
-    h_minus = h_b; 
     L_b = L_b + 0.5 * static_cast<double>(dt) * (static_cast<double>(v_N_minus) / (RN_minus + h_minus) + 
                                                  static_cast<double>(v_N_plus)  / (RN_minus + h_plus));
 }
@@ -232,7 +229,6 @@ void INSMechanization::applyErrorFeedback(const Eigen::Vector3f& delta_p,
     const double cos_L = std::cos(L_b);
 
     // 1. Position Error Feedback (Groves Eq. 14.60 & 14.61)
-    // delta_p = [delta_N, delta_E, delta_D]^T
     L_b      -= static_cast<double>(delta_p(0)) / (RN_Lb + h_b);
     lambda_b -= static_cast<double>(delta_p(1)) / ((RE_Lb + h_b) * std::cos(L_b));
     h_b      += static_cast<double>(delta_p(2)); 
@@ -241,7 +237,6 @@ void INSMechanization::applyErrorFeedback(const Eigen::Vector3f& delta_p,
     vn_eb -= delta_v;
 
     // 3. Attitude Error Feedback (Groves Eq. 14.63)
-    // 3. Attitude Error Feedback: C_b_n(+) = (I3 - [psi x]) * C_b_n(-) (Groves Eq. 14.63)
     Eigen::Matrix3f psi_skew = skewSymmetric(delta_psi);
     Cn_b = (Eigen::Matrix3f::Identity() - psi_skew) * Cn_b;
     reorthogonalizeAttitude();
